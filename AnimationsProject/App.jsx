@@ -32,9 +32,9 @@ const App = () => {
           opacity: fadeAnim,
           transform: [
             {
-              translateY: fadeAnim.interpolate({
+              translateX: fadeAnim.interpolate({
                 inputRange: [0, 1],
-                outputRange: [150, 0], // 0 : 150, 0.5 : 75, 1 : 0
+                outputRange: [-100, 100],
               }),
             },
           ],
