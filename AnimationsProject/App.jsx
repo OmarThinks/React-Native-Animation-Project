@@ -2,49 +2,13 @@ import {View, Text, Animated, Button} from 'react-native';
 import React from 'react';
 
 const App = () => {
-  const animatedValue = React.useRef(new Animated.Value(0)).current;
-
-  const handlePress = async () => {
-    Animated.timing(animatedValue, {
-      toValue: 1,
-      duration: 5000,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  console.log(animatedValue);
-
-  return (
-    <View>
-      <Animated.View
-        style={{
-          backgroundColor: 'red',
-          //width: animatedValue,
-          //height: animatedValue,
-          width: 100,
-          height: 100,
-          opacity: animatedValue,
-        }}
-      />
-
-      <Button
-        style={{backgroundColor: 'lime'}}
-        title="Press Me"
-        onPress={handlePress}
-      />
-    </View>
-  );
-};
-
-/*
-
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
 
   const fadeIn = () => {
     // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 5000,
+      duration: 1000,
       useNativeDriver: true,
     }).start();
   };
@@ -53,7 +17,7 @@ const App = () => {
     // Will change fadeAnim value to 0 in 3 seconds
     Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 3000,
+      duration: 1000,
       useNativeDriver: true,
     }).start();
   };
@@ -66,14 +30,20 @@ const App = () => {
           height: 100,
           backgroundColor: 'red',
           opacity: fadeAnim,
+          transform: [
+            {
+              translateY: fadeAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [150, 0], // 0 : 150, 0.5 : 75, 1 : 0
+              }),
+            },
+          ],
         }}
       />
       <Button title="Fade In View" onPress={fadeIn} />
+      <Button title="Fade Out View" onPress={fadeOut} />
     </View>
   );
-
-
-
-*/
+};
 
 export default App;
